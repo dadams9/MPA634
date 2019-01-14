@@ -38,10 +38,16 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = cty)) +
   geom_point()
 
 #Map a continuous variable to size
-ggplot(data = mpg, mapping = aes(x = displ, y = hwy, size= cty, color = cty)) + 
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, size= cty, color = displ < 5)) + 
   geom_point()
 
 #Map a continuous variable to shape
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy, shape = displ)) + 
   geom_point()
+
+#Use facet
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = trans)) + 
+  facet_wrap(~ class, nrow = 2)
+
 
