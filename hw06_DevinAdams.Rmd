@@ -1,0 +1,84 @@
+---
+title: "Homework 6"
+author: "Devin Adams"
+date: "1/28/2019"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(nycflights13)
+```
+
+## Concepts  
+
+1.  Compare and contrast filter and select.  
+Filter is used to select rows (or observations) and select is used to select columns (or variables).  
+1.  Explain how ":" can be used when selecting variables.  
+":" can be used to columns in a range. For example you can select columns 6,7,8,9, and 10 by using the colon like "6:10". It can also be used with named columns as well such as "arrival_time:dep_delay" selects all the columns from arrival_time to dep_delay.  
+
+## Interpretation of code  
+
+Interpret the following R code:  
+
+```{r code chunk interpretation, warning = FALSE}
+converted_times <- mutate(
+  flights,
+  hours = dep_time %/% 100,
+  minutes = dep_time %% 100,
+  minutes_after_midnight = 60 * hours + minutes
+)
+ggplot(
+  data = converted_times,
+  mapping = aes(x = origin,
+                y = minutes_after_midnight,
+                fill = origin)
+) +
+  geom_violin(show.legend = FALSE) +
+  geom_boxplot(width = 0.1,
+               fill = "grey",
+               show.legend = FALSE) +
+  coord_flip()
+```
+
+Line 25: Declares the following chunk as r code and suprresses any warnings from showing.
+Line 26: Creates a new variable called "converted_times" by mutating data
+Line 27: Flights is the data that will be mutated with the following calculations. These new columns will be added at the end of the flights data.  
+Line 28: A new column is created called "hours" and is calculated by dividing the dep_time by 100 using integer division  
+Line 29: A new column is created called "minutes" and is calculated by dividing the dep_time by 100 using  modular division  
+Line 30: A new column is created called "minutes_after_midnight" and is calculated by multiplying the hours previously calculated by 60 then adding minutes  
+Line 31: Ends the mutate function  
+Line 32: Begins a ggplot  
+Line 33: The data being used to plot is the converted_times    
+Line 34: The origin is mapped to the x axis  
+Line 35: The minutes_after_midnight is mapped to the y axis  
+Line 36: The origin is mapped to the fill color of the plot  
+Line 37: The ggplot function is ended  
+Line 38: A violin plot is created and the legend is turned off  
+Line 39: A boxplot is created and the width is reduced to 0.1  
+Line 40: The fill color of the boxplot is grey  
+Line 41: The legend for the boxplot is turned off  
+Line 42: The coordinate axes are flipped
+
+## Coding Problem 1:
+
+1.  Select only those flights going from JFK to Chicago.  
+1.  Create a data frame that includes the following variables: dep_delay and arr_delay.    
+1.  Rename the variables dep_delay to departure and arr_delay to arrival.  
+1.  Draw a scatterplot of arrival on departure with colored loess and linear regression smoothers without confidence intervals.  
+
+
+```{r JFK to Chicago}
+
+```  
+
+## Coding Problem 2: Use mutate and the ranking function to find the 5 most delayed flights departing from JFK.
+1.  Choose the flights departing from JFK
+1.  Create a new variable called delay which is the rank of the delay with 1 being the longest delay.
+1.  For the five most delayed flights, print the new variable delay along with year, month, day, dest, carrier, and dep_delay with the most delayed at the top of the table.  
+
+```{r 5 most delayed flights}
+
+```  
+
